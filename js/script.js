@@ -1,14 +1,56 @@
-  var computerMove, randomNumber;
-  randomNumber = Math.floor(Math.random() * 3 + 1);
-  console.log('wylosowana liczba to: ' + randomNumber);
-  if (randomNumber == '1') {
-    computerMove = 'kamień';
+var argComputerMove, argMoveId, argPlayerMove, computerMove, playerInput, playerMove, randomNumber;
+
+/**
+ * Get Move Name
+ */
+function getMoveName(argMoveId) {
+  console.log('wywołano funkcję getMoveName z argumentem: ' + argMoveId);
+  if (argMoveId == 1) {
+    return 'kamień';
   } else {
-    computerMove = 'nieznany ruch';
+    printMessage('Nie znam ruchu o id ' + argMoveId + '. Zakładam, że chodziło o "kamień".');
+    return 'kamień';
   }
-  if (randomNumber == '2') {
-    computerMove = 'papier';
-  } else if (randomNumber == '3') {
-    computerMove = 'nożyce';
+  if (argMoveId == 2) {
+    return 'papier';
+  } else {
+    printMessage('Nie znam ruchu o id ' + argMoveId + 'Zakładam, że chodził o "papier".');
+    return 'papier';
   }
-  printMessage('Mój ruch: ' + computerMove);
+  if (argMoveId == 3) {
+    return 'nożyce';
+  } else {
+    printMessage('Nie znam ruchu o id ' + argMoveId + 'Zakładam, że chodzi i "nożyce".');
+    return 'nożyce';
+  }
+}
+
+/**
+ * Display Result
+ */
+function displayResult(argPlayerMove, argComputerMove) {
+  console.log('wywołano funkcję displayResults z argumentami: ' + argPlayerMove + ', ' + argComputerMove);
+  if (argPlayerMove == 'papier' && argComputerMove == 'kamień') {
+    printMessage('Wygrywasz!');
+  } else {
+    printMessage('Przegrywasz :(');
+  }
+
+  // printMessage('Zagrałem ' + argComputerMove + ', a Ty ' + argPlayerMove);
+  // if (argPlayerMove == 'papier' && argComputerMove == 'nożyce') {
+  //  printMessage('Wygrywasz!');
+  // } else {
+  //  printMessage('Przegrywasz :(');
+  //}
+  //printMessage('Zagrałem ' + argComputerMove + ', a Ty ' + argPlayerMove);
+  
+}
+playerInput = prompt('Wybierz swój ruch! 1: kamień, 2: papier, 3: nożyce.');
+console.log('wybór ruchu gracza to: ' + playerInput);
+playerMove = getMoveName(playerInput);
+console.log('ruch gracza to: ' + playerMove);
+randomNumber = Math.floor(Math.random() * 3 + 1);
+console.log('wylosowana liczba to: ' + randomNumber);
+computerMove = getMoveName(randomNumber);
+console.log('ruch komputera to: ' + computerMove);
+displayResult(playerMove, computerMove);
